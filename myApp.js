@@ -1,14 +1,13 @@
 var express = require('express');
-var path = require('path');
 var app = express();
-
+require('dotenv').config();
 
 app.get('/', function(req,res){
     res.sendFile(__dirname + '/views/index.html' )
 })
 
-app.get('/json', function(req,res){
-    res.json({"message":"Hello json"})
+app.get('/json',function(req,res){
+    res.json(process.env.MESSAGE_STYLE)
 })
 
 app.use('/public',express.static(__dirname + '/public'));
