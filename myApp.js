@@ -2,6 +2,14 @@ var express = require('express');
 var app = express();
 require('dotenv').config();
 
+
+var myLogger = function (req, res, next) {
+    console.log(req.method + " " + req.path + " - " + req.ip)
+    next()
+  }
+  
+app.use(myLogger)
+
 app.get('/', function(req,res){
     res.sendFile(__dirname + '/views/index.html' )
 })
@@ -14,7 +22,9 @@ app.get('/json',function(req,res){
   }
 })
 
+
 app.use('/public',express.static(__dirname + '/public'));
+
 
 app.listen()
 
